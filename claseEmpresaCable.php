@@ -76,7 +76,7 @@ class EmpresaCable {
     }
 
     //Metodo que busca un contrato
-    public function buscarContrato($tipoDoc, $nroDoc) {
+    public function buscarContrato($tipoDoc,$nDoc) {
         $contratos = $this->getColContratos();
         $i = 0;
         $encontrado = false;
@@ -84,7 +84,7 @@ class EmpresaCable {
         $cantContratos = count($contratos);
         while ($i < $cantContratos && !$encontrado) {
             $cliente = $contratos[$i]->getRefCliente();
-            if ($cliente->getTipoDoc() == $tipoDoc && $cliente->getNroDoc() == $nroDoc) {
+            if ($cliente->getTipoDocumento() == $tipoDoc && $cliente->getNumeroDocumento() == $nDoc) {
                 $contratoEncontrado = $contratos[$i];
                 $encontrado = true;
             }
@@ -139,5 +139,23 @@ class EmpresaCable {
             }
         }
         return $importeFinal;
+    }
+
+
+    //Metodo para incorporar contrato
+    public function incorporarContrato($plan,$cliente,$fechaInicio,$fechaVencimiento,$webOEmpresa){
+        $contratos = $this->getColContratos();
+        $i = 0;
+        $cantContratos = count($contratos);
+        $encontrado = false;
+
+        while ($i < $cantContratos && !$encontrado) {
+            $contrato = $contratos[$i];
+            $cliente2 = $contrato->getRefCliente();
+            if($cliente2->getTipoDocumento() === $cliente->getTipoDocumento() &&
+            $cliente2->getNumeroDocumento() === $cliente->getNumeroDocumento()){
+                //perdon no llegue
+            }
+        }
     }
 }
